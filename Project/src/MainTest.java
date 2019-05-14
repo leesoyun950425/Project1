@@ -1,6 +1,9 @@
 import javax.swing.JFrame;
 
 public class MainTest extends JFrame{
+	
+	
+	
 	public MainTest() {
 	}
 	
