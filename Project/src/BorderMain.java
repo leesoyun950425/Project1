@@ -1,41 +1,76 @@
-
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JTextArea;
-import java.awt.Font;
 import javax.swing.JButton;
+import javax.swing.JTextArea;
+import javax.swing.JToggleButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class BorderMain extends JFrame{
 	private JTextField textField;
+	private JTextField txtid;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	
 	public BorderMain() {
-		setTitle("°Ô½ÃÆÇ");
 		getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("<<<Á¦¸ñ>>>");
-		lblNewLabel.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 25));
-		lblNewLabel.setBounds(17, 41, 161, 28);
-		getContentPane().add(lblNewLabel);
+		JButton btnNewButton = new JButton("\uAE00\uC4F0\uAE30");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				BorderWrite bw = new BorderWrite();
+			}
+		});
+		btnNewButton.setBounds(23, 385, 97, 23);
+		getContentPane().add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("\uAE00\uBCF4\uAE30");
+		btnNewButton_1.setBounds(153, 385, 97, 23);
+		getContentPane().add(btnNewButton_1);
+		
+		JButton btnNewButton_2 = new JButton("\uC885\uB8CC");
+		btnNewButton_2.setBounds(276, 385, 97, 23);
+		getContentPane().add(btnNewButton_2);
+		
+		JTextArea list = new JTextArea();
+		list.setBounds(23, 34, 354, 341);
+		getContentPane().add(list);
+		list.setEditable(false);
 		
 		textField = new JTextField();
-		textField.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
-		textField.setBounds(195, 42, 342, 33);
+		textField.setHorizontalAlignment(SwingConstants.CENTER);
+		textField.setText("\uC81C\uBAA9");
+		textField.setBounds(23, 11, 87, 22);
 		getContentPane().add(textField);
 		textField.setColumns(10);
+		textField.setEditable(false);
 		
-		JLabel lblNewLabel_1 = new JLabel("<<<<<³»¿ë>>>>>");
-		lblNewLabel_1.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 22));
-		lblNewLabel_1.setBounds(187, 98, 223, 31);
-		getContentPane().add(lblNewLabel_1);
+		txtid = new JTextField();
+		txtid.setText("\uC0AC\uC6A9\uC790ID");
+		txtid.setHorizontalAlignment(SwingConstants.CENTER);
+		txtid.setEditable(false);
+		txtid.setColumns(10);
+		txtid.setBounds(112, 11, 87, 22);
+		getContentPane().add(txtid);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(50, 144, 457, 206);
-		getContentPane().add(textArea);
+		textField_2 = new JTextField();
+		textField_2.setText("\uC791\uC131\uC2DC\uAC04");
+		textField_2.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_2.setEditable(false);
+		textField_2.setColumns(10);
+		textField_2.setBounds(202, 11, 87, 22);
+		getContentPane().add(textField_2);
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(206, 452, 129, 29);
-		getContentPane().add(btnNewButton);
-		setSize(600,600);
+		textField_3 = new JTextField();
+		textField_3.setText("\uC870\uD68C\uC218");
+		textField_3.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_3.setEditable(false);
+		textField_3.setColumns(10);
+		textField_3.setBounds(290, 11, 87, 22);
+		getContentPane().add(textField_3);
+		
+		setSize(420, 510);
 		setVisible(true);
 	}
 }

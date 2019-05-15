@@ -1,15 +1,15 @@
 import javax.swing.JFrame;
 
 public class MainTest extends JFrame{
+	static MainTest win;
 	
-	
-	
-	public MainTest() {
-	}
-	
+
 	public LoginMain login1 = null;
 	public LoginMain2 login2 = null;
 	 
+	public MainTest() {
+	}
+	
 	 public void change(String panelName) {
 			if(panelName.equals("LoginMain")) {
 				getContentPane().removeAll();

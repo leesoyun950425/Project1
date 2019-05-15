@@ -14,15 +14,15 @@ public class LoginMain extends JPanel{
 	private JButton jButton1;
 	private MainTest win;
 	public MembershipDTO dto;
-	static JTextField idText = new JTextField();
 	static String sessionId;
-
-	
+//
+//	public LoginMain() {
+//	}
 	public LoginMain(MainTest win) {
 		 this.win = win;
 	      setBackground(Color.BLACK);
 	
-	      setBounds(0, 66, 263, 645);
+	      setBounds(0, 66, 263, 659);
 	      setLayout(null);
 	      
 	      JLabel lb1 = new JLabel("\uC544\uC774\uB514");
@@ -65,15 +65,13 @@ public class LoginMain extends JPanel{
 	      			win.change("LoginMain2");
 	      			sessionId = inputId;
 	      			LoginMain2 login2 = new LoginMain2();
+	      			login2.l1.setText(sessionId);
 	      		}else {
 	      			JOptionPane.showMessageDialog(null, "아이디 혹은 비밀번호를 잘못입력하셨습니다.");
 	      		}
 	      	}
 	      });
-//	      
-//	      inputId = idText.getText();
-//	      LoginMain2 login2 = new LoginMain2();
-//	      
+
 	      b2.setFont(new Font("굴림", Font.BOLD, 16));
 	      b2.setBounds(12, 189, 97, 23);
 	      add(b2);
@@ -91,11 +89,13 @@ public class LoginMain extends JPanel{
 	      JButton btnNewButton_1 = new JButton("게시판");
 	      btnNewButton_1.addActionListener(new ActionListener() {
 	      	public void actionPerformed(ActionEvent e) {
-	      		BorderMain b = new BorderMain();
+	      		BorderMain bm = new BorderMain();
 	      	}
 	      });
 	      btnNewButton_1.setBounds(78, 279, 97, 23);
 	      add(btnNewButton_1);
+	      
+	      setVisible(true);
 	}
 	
 	
