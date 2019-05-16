@@ -1,5 +1,6 @@
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,8 +23,8 @@ public class BorderDAO {
 			ps.setString(1, dto.getTitle());
 			ps.setString(2, dto.getContent());
 			ps.setString(3, dto.getUid());
-			ps.setString(4, dto.getDate());
-			ps.setString(5, dto.getCount());
+			ps.setString(4, dto.getTdate());
+			ps.setInt(5, dto.getCount());
 			ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -36,25 +37,25 @@ public class BorderDAO {
 			}
 		}
 	}
-	public BorderDTO select(String inputNum) {
+	public BorderDTO select(String inputId) {
 		BorderDTO dto = new BorderDTO();
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection(url,user,password);
 			String sql = "select * from border where num = ?";
 			ps = con.prepareStatement(sql);
-			ps.setString(1, dto.getNum());
+			ps.setString(1, dto.getUid());
 			rs = ps.executeQuery();
 			if(rs.next()) {
 				String title = rs.getString(2);
 				String content = rs.getString(3);
 				String uid = rs.getString(4);
-				String date = rs.getString(5);
-				String count = rs.getString(6);
-				dto.setNum(title);
+				String tdate = rs.getString(5);
+				int count = rs.getInt(6);
+				dto.setTitle(title);
 				dto.setContent(content);
 				dto.setUid(uid);
-				dto.setDate(date);
+				dto.setTdate(tdate);;
 				dto.setCount(count);
 			}
 		} catch (Exception e) {

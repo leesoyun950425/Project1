@@ -1,25 +1,37 @@
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.JToggleButton;
 import java.awt.event.ActionListener;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.JTable;
+import java.awt.Color;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.border.LineBorder;
 
 public class BorderMain extends JFrame{
-	private JTextField textField;
-	private JTextField txtid;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTable table;
 	
 	public BorderMain() {
-		getContentPane().setLayout(null);
+		Dimension dim = new Dimension(500,500);
 		
-		JButton btnNewButton = new JButton("\uAE00\uC4F0\uAE30");
+		setLocation(100,200);
+		setPreferredSize(dim);		
+		
+		JButton btnNewButton = new JButton("글쓰기");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				BorderWrite bw = new BorderWrite();
+				if(LoginMain2.l1.getText()=="") {
+					JOptionPane.showMessageDialog(null, "로그인 하고 작성해주세요!!");
+				}else {
+					BorderWrite bw = new BorderWrite();
+				}
 			}
 		});
 		btnNewButton.setBounds(23, 385, 97, 23);
@@ -30,46 +42,24 @@ public class BorderMain extends JFrame{
 		getContentPane().add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("\uC885\uB8CC");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		btnNewButton_2.setBounds(276, 385, 97, 23);
 		getContentPane().add(btnNewButton_2);
 		
-		JTextArea list = new JTextArea();
-		list.setBounds(23, 34, 354, 341);
-		getContentPane().add(list);
-		list.setEditable(false);
 		
-		textField = new JTextField();
-		textField.setHorizontalAlignment(SwingConstants.CENTER);
-		textField.setText("\uC81C\uBAA9");
-		textField.setBounds(23, 11, 87, 22);
-		getContentPane().add(textField);
-		textField.setColumns(10);
-		textField.setEditable(false);
+		String sub[] = {"제목","사용자ID","날짜","조회수"};
+		String borcon[][]= {{"z","z","z","z"}};
 		
-		txtid = new JTextField();
-		txtid.setText("\uC0AC\uC6A9\uC790ID");
-		txtid.setHorizontalAlignment(SwingConstants.CENTER);
-		txtid.setEditable(false);
-		txtid.setColumns(10);
-		txtid.setBounds(112, 11, 87, 22);
-		getContentPane().add(txtid);
-		
-		textField_2 = new JTextField();
-		textField_2.setText("\uC791\uC131\uC2DC\uAC04");
-		textField_2.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_2.setEditable(false);
-		textField_2.setColumns(10);
-		textField_2.setBounds(202, 11, 87, 22);
-		getContentPane().add(textField_2);
-		
-		textField_3 = new JTextField();
-		textField_3.setText("\uC870\uD68C\uC218");
-		textField_3.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_3.setEditable(false);
-		textField_3.setColumns(10);
-		textField_3.setBounds(290, 11, 87, 22);
-		getContentPane().add(textField_3);
-		
+
+		JTable table = new JTable(borcon,sub);
+		table.setBorder(new LineBorder(Color.RED));
+		table.setBounds(23, 360, 349, -338);
+		JScrollPane scroll = new JScrollPane(table);
+		getContentPane().add(scroll);
 		setSize(420, 510);
 		setVisible(true);
 	}

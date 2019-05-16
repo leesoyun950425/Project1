@@ -57,6 +57,9 @@ public LoginMain2(MainTest win) {
 	logoutbt.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			win.change("LoginMain");
+			LoginMain2.l1.setText("");
+			LoginMain.idText.setText("");
+			LoginMain.pwText.setText("");
 		}
 	});
 	logoutbt.setBounds(142, 208, 129, 34);
@@ -73,6 +76,24 @@ public LoginMain2(MainTest win) {
 	button.setBackground(Color.WHITE);
 	button.setBounds(226, 143, 148, 34);
 	add(button);
+	
+	JButton btnNewButton_1 = new JButton("게시판");
+	btnNewButton_1.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent arg0) {
+			BorderMain bm = new BorderMain();
+		}
+	});
+	btnNewButton_1.setBounds(153, 286, 97, 23);
+	add(btnNewButton_1);
+	
+	JButton btnNewButton_2 = new JButton("마이페이지");
+	btnNewButton_2.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			MemberMy my = new MemberMy();
+		}
+	});
+	btnNewButton_2.setBounds(142, 330, 129, 23);
+	add(btnNewButton_2);
 	
 	setVisible(true);
 }

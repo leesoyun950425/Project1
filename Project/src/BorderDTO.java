@@ -1,23 +1,25 @@
+import java.util.Date;
 
 public class BorderDTO {
-	private String num;
+//	private String num;
 	private String title;
 	private String content;
 	private String uid;
-	private String date;
-	private String count;
-	public String getNum() {
-		return num;
-	}
-	public void setNum(String num) {
-		this.num = num;
-	}
+	private String tdate;
+	private int count;
+//	public String getNum() {
+//		return num;
+//	}
+//	public void setNum(String num) {
+//		this.num = num;
+//	}
 	public String getContent() {
 		return content;
 	}
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
@@ -30,16 +32,16 @@ public class BorderDTO {
 	public void setUid(String uid) {
 		this.uid = uid;
 	}
-	public String getDate() {
-		return date;
+	public String getTdate() {
+		return tdate;
 	}
-	public void setDate(String date) {
-		this.date = date;
+	public void setTdate(String tdate) {
+		this.tdate = tdate;
 	}
-	public String getCount() {
+	public int getCount() {
 		return count;
 	}
-	public void setCount(String count) {
+	public void setCount(int count) {
 		this.count = count;
 	}
 }

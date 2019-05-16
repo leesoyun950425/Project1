@@ -40,21 +40,21 @@ public class MembershipDAO {
 		}
 	}
 	
-	public MembershipDTO select(String inputNum) {
+	public MembershipDTO select(String inputId) {
 		MembershipDTO dto = new MembershipDTO();
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection(url,user,password);
 			String sql = "select * from membership where id=?";
 			ps = con.prepareStatement(sql);
-			ps.setString(1, inputNum);
+			ps.setString(1, inputId);
 			rs = ps.executeQuery();
 			if(rs.next()) {
-				String id = rs.getString(1);
-				String pw = rs.getString(2);
-				String name = rs.getString(3);
-				String tel = rs.getString(4);
-				String addr = rs.getString(5);
+				String id = rs.getString(2);
+				String pw = rs.getString(3);
+				String name = rs.getString(4);
+				String tel = rs.getString(5);
+				String addr = rs.getString(6);
 				dto.setId(id);
 				dto.setPw(pw);
 				dto.setName(name);
@@ -101,6 +101,33 @@ public class MembershipDAO {
 		}
 		return dto;
 	}
+	public MembershipDTO selectIdName(String inputName, String inputTel) {
+		MembershipDTO dto = new MembershipDTO();
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection(url,user,password);
+			String sql = "select * from membership where name=? and tel = ?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, inputName);
+			ps.setString(2, inputTel);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				String id = rs.getString(2);
+				dto.setId(id);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				ps.close();
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return dto;
+	}
 	public MembershipDTO selectPw(String inputPw) {
 		MembershipDTO dto = new MembershipDTO();
 		try {
@@ -127,45 +154,69 @@ public class MembershipDAO {
 		}
 		return dto;
 	}
-//	public ArrayList selectAll() {
-//		ArrayList list = new ArrayList();
-//		MembershipDTO dto = new MembershipDTO();
-//		 try {
-//			  Class.forName("com.mysql.jdbc.Driver");
-//			  con = DriverManager.getConnection(url,user,password);
-//			  String sql = "select * from bbs ";
-//			  ps = con.prepareStatement(sql);
-//			  rs = ps.executeQuery();
-//			 while(rs.next()) {
-//				String num = rs.getString(1);
-//				String id = rs.getString(2);
-//				String pw = rs.getString(3);
-//				String name = rs.getString(4);
-//				String tel = rs.getString(5);
-//				String addr = rs.getString(6);
-//				String style = rs.getString(7);
-//				dto.setNum(num);
-//				dto.setId(id);
-//				dto.setPw(pw);
-//				dto.setName(name);
-//				dto.setTel(tel);
-//				dto.setAddr(addr);
-//				dto.setStyle(style);
-//				list.add(dto);
-//			 }
-//		 } catch (Exception e) {
-//			 e.printStackTrace();
-//		 }finally {
-//		  try {
-//			  rs.close();
-//			  ps.close();
-//			  con.close();
-//		  } catch (SQLException e) {
-//			  e.printStackTrace();
-//		  	}
-//		  }
-//		return list;
-//	}
+	
+	public MembershipDTO selectPwName(String inputId,String inputName) {
+		MembershipDTO dto = new MembershipDTO();
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection(url,user,password);
+			String sql = "select * from membership where id=? and name=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, inputId);
+			ps.setString(2, inputName);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				String pw = rs.getString(3);
+				dto.setPw(pw);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				ps.close();
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return dto;
+	}
+	public ArrayList selectAll() {
+		ArrayList list = new ArrayList();
+		MembershipDTO dto = new MembershipDTO();
+		 try {
+			  Class.forName("com.mysql.jdbc.Driver");
+			  con = DriverManager.getConnection(url,user,password);
+			  String sql = "select * from membership ";
+			  ps = con.prepareStatement(sql);
+			  rs = ps.executeQuery();
+			 while(rs.next()) {
+				String id = rs.getString(2);
+				String pw = rs.getString(3);
+				String name = rs.getString(4);
+				String tel = rs.getString(5);
+				String addr = rs.getString(6);
+				dto.setId(id);
+				dto.setPw(pw);
+				dto.setName(name);
+				dto.setTel(tel);
+				dto.setAddr(addr);
+				list.add(dto);
+			 }
+		 } catch (Exception e) {
+			 e.printStackTrace();
+		 }finally {
+		  try {
+			  rs.close();
+			  ps.close();
+			  con.close();
+		  } catch (SQLException e) {
+			  e.printStackTrace();
+		  	}
+		  }
+		return list;
+	}
 	
 	public void update(MembershipDTO dto) {
 		try {

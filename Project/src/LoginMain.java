@@ -9,15 +9,21 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JPasswordField;
 
 public class LoginMain extends JPanel{
+	
 	private JButton jButton1;
 	private MainTest win;
 	public MembershipDTO dto;
+	
+	
 	static String sessionId;
-//
-//	public LoginMain() {
-//	}
+	static JTextField idText;
+	static JPasswordField pwText;
+
+	public LoginMain() {
+	}
 	public LoginMain(MainTest win) {
 		 this.win = win;
 	      setBackground(Color.BLACK);
@@ -38,21 +44,20 @@ public class LoginMain extends JPanel{
 	      add(lb2);
 	      
 	      
-	      JTextField idText = new JTextField();
+	      idText = new JTextField();
 	      idText.setBounds(112, 78, 139, 21);
 	      add(idText);
 	      idText.setColumns(10);
 	      
-	      JTextField pwText = new JTextField();
+	      pwText = new JPasswordField();
 	      pwText.setBounds(112, 132, 139, 21);
 	      add(pwText);
-	      pwText.setColumns(10);
 	      
 	      JButton b2 = new JButton("\uB85C\uADF8\uC778");
 	      b2.addActionListener(new ActionListener() {
 	      	public void actionPerformed(ActionEvent e) {
 	      		String inputId = idText.getText();
-	      		String inputPw = pwText.getText();
+	      		String inputPw = new String(pwText.getPassword());
 	      		
 	      		MembershipDAO dao = new MembershipDAO();
 	      		MembershipDTO dto = dao.selectId(inputId);
@@ -76,7 +81,7 @@ public class LoginMain extends JPanel{
 	      b2.setBounds(12, 189, 97, 23);
 	      add(b2);
 	      
-	      JButton b3 = new JButton("\uD68C\uC6D0\uAC00\uC785");
+	      JButton b3 = new JButton("회원가입");
 	      b3.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
 	            MembershipMain m1 = new MembershipMain();
@@ -92,11 +97,29 @@ public class LoginMain extends JPanel{
 	      		BorderMain bm = new BorderMain();
 	      	}
 	      });
-	      btnNewButton_1.setBounds(78, 279, 97, 23);
+	      btnNewButton_1.setBounds(78, 319, 97, 23);
 	      add(btnNewButton_1);
+	      
+	      JButton btnNewButton = new JButton("아이디 찾기");
+	      btnNewButton.addActionListener(new ActionListener() {
+	      	public void actionPerformed(ActionEvent e) {
+	      		SelectId sid = new SelectId();
+	      	}
+	      });
+	      btnNewButton.setBounds(12, 238, 111, 23);
+	      add(btnNewButton);
+	      
+	      JButton btnNewButton_2 = new JButton("비밀번호 찾기");
+	      btnNewButton_2.addActionListener(new ActionListener() {
+	      	public void actionPerformed(ActionEvent e) {
+	      		SelectPw spw = new SelectPw();
+	      	}
+	      });
+	      btnNewButton_2.setBounds(127, 238, 124, 23);
+	      add(btnNewButton_2);
+	      
+	    
 	      
 	      setVisible(true);
 	}
-	
-	
 }
