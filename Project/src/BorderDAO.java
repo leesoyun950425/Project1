@@ -1,10 +1,10 @@
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class BorderDAO {
 	String url = "jdbc:mysql://localhost:3306/clothes";
@@ -42,7 +42,7 @@ public class BorderDAO {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection(url,user,password);
-			String sql = "select * from border where num = ?";
+			String sql = "select * from border where uid = ?";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, dto.getUid());
 			rs = ps.executeQuery();
@@ -70,6 +70,41 @@ public class BorderDAO {
 			}
 		}
 		return dto;
+	}
+	public ArrayList selectAll() {
+		ArrayList list = new ArrayList();
+		BorderDTO dto = null;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection(url,user,password);
+			String sql = "select * from border ";
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				dto = new BorderDTO();
+				String title = rs.getString(2);
+				String uid = rs.getString(4);
+				String tdate = rs.getString(5);
+				int count = rs.getInt(6);
+				dto.setTitle(title);
+				dto.setUid(uid);
+				dto.setTdate(tdate);
+				dto.setCount(count);
+				list.add(dto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				ps.close();
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
 	}
 	public void update(BorderDTO dto) {
 		try {

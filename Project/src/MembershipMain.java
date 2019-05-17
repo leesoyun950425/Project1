@@ -102,8 +102,14 @@ public class MembershipMain extends JFrame{
 				dto.setTel(tel);
 				dto.setAddr(addr);
 				
+				dto = dao.selectId(id);
+				String selid = dto.getId();
+				
 				if(!pws.equals(pws2)) {
 					JOptionPane.showMessageDialog(null,"비밀번호가 일치하지 않습니다!!");
+					
+				}else if(id.equals(selid)){
+					JOptionPane.showMessageDialog(null,"아이디 중복체크 해주세요!!");
 				}else {
 					dao.insert(dto);
 					dispose();
@@ -123,18 +129,13 @@ public class MembershipMain extends JFrame{
 				MembershipDAO dao = new MembershipDAO();
 				MembershipDTO dto = dao.selectId(inputId);
 				String id = dto.getId();
-				String idw = null;
-				while(true) {
-					if(inputId.equals(id)) {
-						JOptionPane.showMessageDialog(null, "중복됐습니다.다시입력하세요");
-						idw = JOptionPane.showInputDialog("ID재입력");
-						if(!idw.equals(id)) {
-							JOptionPane.showMessageDialog(null, "사용가능한 ID입니다");
-							break;
-						}
-						}
 				
-					}
+				if(inputId.equals(id)) {
+					JOptionPane.showMessageDialog(null, "중복됐습니다.다시입력하세요");
+				}else {
+					JOptionPane.showMessageDialog(null, "성공");
+				}
+				
 				}
 		});
 		b1.setForeground(new Color(255, 105, 180));

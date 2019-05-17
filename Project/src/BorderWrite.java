@@ -1,7 +1,8 @@
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JTextArea;
 import java.awt.Font;
 import javax.swing.JButton;
@@ -17,6 +18,8 @@ public class BorderWrite extends JFrame{
 	private JTextField titleText;
 	
 	String inputBId;
+	JTable tablewrite;
+	DefaultTableModel modelInsert;
 	
 	public BorderWrite() {
 		setTitle("°Ô½ÃÆÇ");
@@ -65,7 +68,7 @@ public class BorderWrite extends JFrame{
 				
 				String title = titleText.getText();
 				String content = contentText.getText();
-				String uid = inputBId;
+				String uid = IdLb.getText();
 				String tdate = today;
 				int count = 0;
 				
@@ -75,8 +78,11 @@ public class BorderWrite extends JFrame{
 				dto.setTdate(tdate);
 				dto.setCount(count);
 				dao.insert(dto);
-				dispose();
 				
+				modelInsert = BorderMain.model;
+				tablewrite = new JTable(modelInsert);
+				modelInsert.addRow(new Object[] {title,uid,tdate,count});
+				dispose();
 			}
 		});
 		btnNewButton.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 22));
