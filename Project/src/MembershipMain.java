@@ -96,12 +96,6 @@ public class MembershipMain extends JFrame{
 				String tel = telText.getText();
 				String addr = addrText.getText();
 				
-				dto.setId(id);
-				dto.setPw(pws);
-				dto.setName(name);
-				dto.setTel(tel);
-				dto.setAddr(addr);
-				
 				dto = dao.selectId(id);
 				String selid = dto.getId();
 				
@@ -111,6 +105,12 @@ public class MembershipMain extends JFrame{
 				}else if(id.equals(selid)){
 					JOptionPane.showMessageDialog(null,"아이디 중복체크 해주세요!!");
 				}else {
+
+					dto.setId(id);
+					dto.setPw(pws);
+					dto.setName(name);
+					dto.setTel(tel);
+					dto.setAddr(addr);
 					dao.insert(dto);
 					dispose();
 				}
@@ -133,7 +133,7 @@ public class MembershipMain extends JFrame{
 				if(inputId.equals(id)) {
 					JOptionPane.showMessageDialog(null, "중복됐습니다.다시입력하세요");
 				}else {
-					JOptionPane.showMessageDialog(null, "성공");
+					JOptionPane.showMessageDialog(null, "사용할 수 있는 ID입니다.");
 				}
 				
 				}

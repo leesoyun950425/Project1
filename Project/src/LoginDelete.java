@@ -10,10 +10,10 @@ import java.awt.event.ActionEvent;
 public class LoginDelete extends JFrame{
 	static String inputDId;
 	static JLabel idLBel;
-	static JButton b1;
-
+	private MainTest win;
 	
-	public LoginDelete() {
+	public LoginDelete(MainTest win) {
+		this.win = win;
 		getContentPane().setLayout(null);
 		setSize(430, 284);
 		
@@ -29,24 +29,25 @@ public class LoginDelete extends JFrame{
 		
 		inputDId = LoginMain2.inputId;
 		
-		
-		b1 = new JButton("네,진행할게요.");
-		b1.addActionListener(new ActionListener() {
+		JButton btnNewButton = new JButton("네,진행할게요.");
+		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MembershipDAO dao = new MembershipDAO();
 				MembershipDTO dto = new MembershipDTO();
 				
 				String id = inputDId;
 				dto = dao.selectId(id);
+				
 				if(id.equals(dto.getId())) {
 					dto.setId(id);
 					dao.delete(dto);
 				}
+				win.change("LoginMain");
 				dispose();
 			}
 		});
-		b1.setBounds(36, 144, 153, 29);
-		getContentPane().add(b1);
+		btnNewButton.setBounds(36, 144, 153, 29);
+		getContentPane().add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("아니요.");
 		btnNewButton_1.addActionListener(new ActionListener() {

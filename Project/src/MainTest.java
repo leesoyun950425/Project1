@@ -9,11 +9,7 @@ public class MainTest extends JFrame{
 
 	public LoginMain login1 = null;
 	public LoginMain2 login2 = null;
-//	public MainTTT mT = null;
-	 
-//	public MainTest() {
-//	}
-//	
+
 	 public void change(String panelName) {
 			if(panelName.equals("LoginMain")) {
 				getContentPane().removeAll();

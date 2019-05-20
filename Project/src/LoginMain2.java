@@ -68,7 +68,7 @@ public LoginMain2(MainTest win) {
 	JButton button = new JButton("Å»ÅðÇÏ±â");
 	button.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
-			LoginDelete d = new LoginDelete();
+			LoginDelete d = new LoginDelete(win);
 			d.idLBel.setText(inputId);
 		}
 	});

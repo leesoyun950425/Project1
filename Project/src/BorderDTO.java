@@ -41,7 +41,8 @@ public class BorderDTO {
 	public int getCount() {
 		return count;
 	}
-	public void setCount(int count) {
+	public int setCount(int count) {
 		this.count = count;
+		return count;
 	}
 }

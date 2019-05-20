@@ -17,15 +17,19 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.border.LineBorder;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.NClob;
 
 public class BorderMain extends JFrame{
 	static JTable table;
 	
 	static DefaultTableModel model;
+	static int num ;
+	static int su;
+	int result;
 	
 	int nRow,nColumn;
 	String cRow,cColumn;
-	Object cValue;
+	static Object cValue;
 
 	public BorderMain() {
 		Dimension dim = new Dimension(500,500);
@@ -33,10 +37,40 @@ public class BorderMain extends JFrame{
 		setLocation(100,200);
 		setPreferredSize(dim);		
 		
+		String sub[] = {"제목","사용자ID","날짜","조회수"};
+		
+		model = new DefaultTableModel(sub,0);
+		BorderDAO dao = new BorderDAO();
+		ArrayList list = dao.selectAll();
+		
+		for (int i = 0; i < list.size(); i++) {
+			BorderDTO dto = (BorderDTO)list.get(i);
+			model.addRow(new Object[] {dto.getTitle(),dto.getUid(),dto.getTdate(),dto.getCount()});
+			
+		}
+		table = new JTable(model);
+		table.setBorder(new LineBorder(Color.RED));
+		table.setBounds(23, 360, 349, -338);
+		
+		JScrollPane scroll = new JScrollPane(table);
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				table = (JTable)e.getComponent();
+				model = (DefaultTableModel)table.getModel();
+				
+				nRow = table.getSelectedRow();
+				nColumn = table.getSelectedColumn();
+				
+				cRow = table.getColumnName(nColumn);
+				cValue = model.getValueAt(nRow, nColumn);
+			}
+		});
+		
 		JButton btnNewButton = new JButton("글쓰기");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(LoginMain2.l1.getText()=="") {
+				if(LoginMain2.l1.getText()==""||LoginMain2.l1.getText()==null) {
 					JOptionPane.showMessageDialog(null, "로그인 하고 작성해주세요!!");
 				}else {
 					BorderWrite bw = new BorderWrite();
@@ -50,6 +84,16 @@ public class BorderMain extends JFrame{
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				BorderSelect bs = new BorderSelect();
+				BorderDAO dao = new BorderDAO();
+				BorderDTO dto = new BorderDTO();
+				num = dto.getCount();
+				num++;
+				su = num+su;
+				System.out.println(su);
+				
+				result = dao.updatecount(su);
+				
+				dispose();
 			}
 		});
 		btnNewButton_1.setBounds(153, 385, 97, 23);
@@ -65,43 +109,9 @@ public class BorderMain extends JFrame{
 		getContentPane().add(btnNewButton_2);
 		
 		
-		String sub[] = {"제목","사용자ID","날짜","조회수"};
-		
-		model = new DefaultTableModel(sub,0);
-		BorderDAO dao = new BorderDAO();
-		ArrayList list = dao.selectAll();
-		
-		for (int i = 0; i < list.size(); i++) {
-			BorderDTO dto = (BorderDTO)list.get(i);
-			model.addRow(new Object[] {dto.getTitle(),dto.getUid(),dto.getTdate(),dto.getCount()});
-			
-		}
-		
-		table = new JTable(model);
-		table.setBorder(new LineBorder(Color.RED));
-		table.setBounds(23, 360, 349, -338);
-		
-		
-		
-		JScrollPane scroll = new JScrollPane(table);
-		scroll.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				table = (JTable)e.getComponent();
-				model = (DefaultTableModel)table.getModel();
-				
-				nRow = table.getSelectedRow();
-				nColumn = table.getSelectedColumn();
-				
-				cRow = table.getColumnName(nColumn);
-				cValue = model.getValueAt(nRow, nColumn);
-				
-				String str = "선택한 셀 : "+ cRow + "열"+nColumn+"번째 행, 값 :"+cValue;
-				System.out.println(str);
-			}
-		});
 		getContentPane().add(scroll);
 		setSize(420, 510);
 		setVisible(true);
 	}
+
 }
