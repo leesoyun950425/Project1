@@ -66,6 +66,7 @@ public class BorderWrite extends JFrame{
 				BorderDAO dao = new BorderDAO();
 				BorderDTO dto = new BorderDTO();
 				
+				int num = dto.getNum();
 				String title = titleText.getText();
 				String content = contentText.getText();
 				String uid = IdLb.getText();
@@ -81,7 +82,7 @@ public class BorderWrite extends JFrame{
 				
 				modelInsert = BorderMain.model;
 				tablewrite = new JTable(modelInsert);
-				modelInsert.addRow(new Object[] {title,uid,tdate,count});
+				modelInsert.addRow(new Object[] {num,title,uid,tdate,count});
 				dispose();
 			}
 		});

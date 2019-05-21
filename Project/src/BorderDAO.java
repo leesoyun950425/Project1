@@ -37,82 +37,15 @@ public class BorderDAO {
 			}
 		}
 	}
-	public BorderDTO select(Object inputId) {
+
+	public BorderDTO selectNum(int inputNum) {
 		BorderDTO dto = new BorderDTO();
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection(url,user,password);
-			String sql = "select * from border where uid = ?";
+			String sql = "select * from border where num = ?";
 			ps = con.prepareStatement(sql);
-			ps.setObject(1, inputId);
-			rs = ps.executeQuery();
-			if(rs.next()) {
-				String title = rs.getString(2);
-				String content = rs.getString(3);
-				String uid = rs.getString(4);
-				String tdate = rs.getString(5);
-				int count = rs.getInt(6);
-				dto.setTitle(title);
-				dto.setContent(content);
-				dto.setUid(uid);
-				dto.setTdate(tdate);;
-				dto.setCount(count);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			try {
-				rs.close();
-				ps.close();
-				con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return dto;
-	}
-	public BorderDTO select2(Object inputId) {
-		BorderDTO dto = new BorderDTO();
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection(url,user,password);
-			String sql = "select * from border where title = ?";
-			ps = con.prepareStatement(sql);
-			ps.setObject(1, inputId);
-			rs = ps.executeQuery();
-			if(rs.next()) {
-				String title = rs.getString(2);
-				String content = rs.getString(3);
-				String uid = rs.getString(4);
-				String tdate = rs.getString(5);
-				int count = rs.getInt(6);
-				dto.setTitle(title);
-				dto.setContent(content);
-				dto.setUid(uid);
-				dto.setTdate(tdate);;
-				dto.setCount(count);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			try {
-				rs.close();
-				ps.close();
-				con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return dto;
-	}
-	public BorderDTO select3(Object inputId) {
-		BorderDTO dto = new BorderDTO();
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection(url,user,password);
-			String sql = "select * from border where date = ?";
-			ps = con.prepareStatement(sql);
-			ps.setObject(1, inputId);
+			ps.setObject(1, inputNum);
 			rs = ps.executeQuery();
 			if(rs.next()) {
 				String title = rs.getString(2);
@@ -152,10 +85,12 @@ public class BorderDAO {
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				dto = new BorderDTO();
+				int num = rs.getInt(1);
 				String title = rs.getString(2);
 				String uid = rs.getString(4);
 				String tdate = rs.getString(5);
 				int count = rs.getInt(6);
+				dto.setNum(num);
 				dto.setTitle(title);
 				dto.setUid(uid);
 				dto.setTdate(tdate);
@@ -179,10 +114,11 @@ public class BorderDAO {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection(url,user,password);
-			String sql = "update border set content =? where uid =?";
+			String sql = "update border set title =?,content =? where num =?";
 			ps = con.prepareStatement(sql);
-			ps.setString(1, dto.getContent());
-			ps.setString(2, dto.getUid());
+			ps.setString(1, dto.getTitle());
+			ps.setString(2, dto.getContent());
+			ps.setInt(3, dto.getNum());
 			ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -194,13 +130,14 @@ public class BorderDAO {
 				e.printStackTrace();
 			}
 		}
-	}public int updatecount(int count) {
+	}public void updatecount(BorderDTO dto) {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection(url,user,password);
-			String sql = "update border set count =?";
+			String sql = "update border set count =? where title = ?";
 			ps = con.prepareStatement(sql);
-			ps.setInt(1,count);
+			ps.setInt(1,dto.getCount());
+			ps.setString(2, dto.getTitle());
 			ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -211,15 +148,15 @@ public class BorderDAO {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		}return count;
+		}
 	}
 	public void delete(BorderDTO dto) {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection(url,user,password);
-			String sql = "delete from border where uid = ?";
+			String sql = "delete from border where num = ?";
 			ps = con.prepareStatement(sql);
-			ps.setString(1, dto.getUid());
+			ps.setInt(1, dto.getNum());
 			ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -4,13 +4,12 @@ public class MainTest extends JFrame{
 	public MainTest() {
 	}
 
-	static MainTest win;
-	
+	static MainTest win2;
 
 	public LoginMain login1 = null;
 	public LoginMain2 login2 = null;
 
-	 public void change(String panelName) {
+	 public void change2(String panelName) {
 			if(panelName.equals("LoginMain")) {
 				getContentPane().removeAll();
 				getContentPane().add(login1);
@@ -24,14 +23,14 @@ public class MainTest extends JFrame{
 			}
 		}
 	public static void main(String[] args) {
-		MainTest win = new MainTest();
+		MainTest win2 = new MainTest();
 		
-		win.login1 = new LoginMain(win);
-		win.login2 = new LoginMain2(win);
+		win2.login1 = new LoginMain(win2);
+		win2.login2 = new LoginMain2(win2);
 		
-		win.getContentPane().add(win.login1);
-		win.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		win.setSize(500, 700);
-		win.setVisible(true);
+		win2.getContentPane().add(win2.login1);
+		win2.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		win2.setSize(500, 700);
+		win2.setVisible(true);
 	}
 }

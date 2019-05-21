@@ -10,10 +10,10 @@ import java.awt.event.ActionEvent;
 public class LoginDelete extends JFrame{
 	static String inputDId;
 	static JLabel idLBel;
-	private MainTest win;
+	private MainTest win2;
 	
-	public LoginDelete(MainTest win) {
-		this.win = win;
+	public LoginDelete(MainTest win2) {
+		this.win2 = win2;
 		getContentPane().setLayout(null);
 		setSize(430, 284);
 		
@@ -42,7 +42,7 @@ public class LoginDelete extends JFrame{
 					dto.setId(id);
 					dao.delete(dto);
 				}
-				win.change("LoginMain");
+				win2.change2("LoginMain");
 				dispose();
 			}
 		});

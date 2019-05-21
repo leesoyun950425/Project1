@@ -25,11 +25,11 @@ public class BorderMain extends JFrame{
 	static DefaultTableModel model;
 	static int num ;
 	static int su;
-	int result;
+	static String title;
 	
 	int nRow,nColumn;
 	String cRow,cColumn;
-	static Object cValue;
+	Object cValue;
 
 	public BorderMain() {
 		Dimension dim = new Dimension(500,500);
@@ -37,7 +37,7 @@ public class BorderMain extends JFrame{
 		setLocation(100,200);
 		setPreferredSize(dim);		
 		
-		String sub[] = {"제목","사용자ID","날짜","조회수"};
+		String sub[] = {"번호","제목","사용자ID","날짜","조회수"};
 		
 		model = new DefaultTableModel(sub,0);
 		BorderDAO dao = new BorderDAO();
@@ -45,7 +45,7 @@ public class BorderMain extends JFrame{
 		
 		for (int i = 0; i < list.size(); i++) {
 			BorderDTO dto = (BorderDTO)list.get(i);
-			model.addRow(new Object[] {dto.getTitle(),dto.getUid(),dto.getTdate(),dto.getCount()});
+			model.addRow(new Object[] {dto.getNum(),dto.getTitle(),dto.getUid(),dto.getTdate(),dto.getCount()});
 			
 		}
 		table = new JTable(model);
@@ -64,7 +64,8 @@ public class BorderMain extends JFrame{
 				
 				cRow = table.getColumnName(nColumn);
 				cValue = model.getValueAt(nRow, nColumn);
-			}
+				num= (int) table.getValueAt(table.getSelectedRow(), 0);
+ 			}
 		});
 		
 		JButton btnNewButton = new JButton("글쓰기");
@@ -86,12 +87,12 @@ public class BorderMain extends JFrame{
 				BorderSelect bs = new BorderSelect();
 				BorderDAO dao = new BorderDAO();
 				BorderDTO dto = new BorderDTO();
-				num = dto.getCount();
-				num++;
-				su = num+su;
-				System.out.println(su);
-				
-				result = dao.updatecount(su);
+				title= (String) table.getValueAt(table.getSelectedRow(), 1);
+				su = (int) table.getValueAt(table.getSelectedRow(), 4);
+				su++;
+				dto.setCount(su);
+				dto.setTitle(title);
+				dao.updatecount(dto);
 				
 				dispose();
 			}

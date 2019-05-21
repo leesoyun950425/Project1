@@ -10,7 +10,7 @@ import java.awt.Event;
 import javax.swing.JTextField;
 
 public class LoginMain2 extends JPanel{
-private MainTest win;
+private MainTest win2;
 static String inputId;
 static JLabel l1;
 static JButton logoutbt;
@@ -19,9 +19,9 @@ public LoginMain2() {
 	inputId = LoginMain.sessionId;
 }
 
-public LoginMain2(MainTest win) {
+public LoginMain2(MainTest win2) {
 	setBackground(new Color(0, 0, 0));
-	this.win = win;
+	this.win2 = win2;
 	
 	setLayout(null);
 	
@@ -56,7 +56,7 @@ public LoginMain2(MainTest win) {
 	logoutbt.setFont(new Font("±¼¸²", Font.BOLD, 22));
 	logoutbt.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			win.change("LoginMain");
+			win2.change2("LoginMain");
 			LoginMain2.l1.setText("");
 			LoginMain.idText.setText("");
 			LoginMain.pwText.setText("");
@@ -68,7 +68,7 @@ public LoginMain2(MainTest win) {
 	JButton button = new JButton("Å»ÅðÇÏ±â");
 	button.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
-			LoginDelete d = new LoginDelete(win);
+			LoginDelete d = new LoginDelete(win2);
 			d.idLBel.setText(inputId);
 		}
 	});
